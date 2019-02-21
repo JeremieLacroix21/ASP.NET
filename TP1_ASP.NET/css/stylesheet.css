@@ -2,6 +2,7 @@
     auteur: Charles Bourgeois et Jérémie Lacroix
 */
 body{
+
     background-color:antiquewhite;
 }
 
@@ -32,8 +33,6 @@ body{
 .main-contact-container {
     display: grid;
     grid-template-columns: 25% 20% 40% 7% 8%;
-    overflow-y: scroll;
-    overflow-x: hidden;
     padding:5px;
 }
 
