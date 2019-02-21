@@ -1,5 +1,19 @@
 ﻿<!DOCTYPE html>
-
+<!--Liste d'objects de classe Contact
+- Mise en forme de l'interface en trois sections exploitant le style display:grid et grid-template-columns
+- Le formulaire apparaît suite au clic sur + ou sur le bouton de modification d'un contact
+- Le survol des boutons fait apparaître une infobulle
+- Le retrait doit être confirmé via un dialogue
+- La liste des contacts est déroulante
+- Utilisation de la classe ValidationProvider pour le formulaire
+- Une fonction de validation pour chacun des champs:
+       - Nom : non vide, seulement des caractères alphabétiques
+       - Téléphone : non vide, masque de saisie avec jQuery (bonus)
+       - Email : non vide, syntaxe vérifiée par regex (bonus)
+- Pour la surbrillance de la rangée de contact survolée :
+       - Chacune des cellules devront être construites par programmation et posséder la classe CSS cell et row_x (x étant le numéro de la rangée)
+       - Chacune des cellules devront réagir au mouseover et mouseleave afin de mettre à jour la couleur de fond
+       - Les boutons de modification et retrait devront être construits par programmation et doivent apparaître lors d'un survol de leur rangée-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,8 +44,8 @@
     <!-- Liste de contact -->
     <img src="">
     <div class="container">
-    <h3>Gestionaire des contacts</h3>
-        <div class = "array-container">
+        <h3>Gestionaire des contacts</h3>
+        <div class="array-container">
             <div class="header-container">
                 <div class="header-contacts-container">
                     <div>Nom</div>
@@ -46,18 +60,20 @@
 
                 </div>
             </div>
- 
+
             <!--allo-->
-        <div class="form-container">
-            <div class="form-contact-container" id="contactForm" style="display: none;"><div>
-        </div>
+            <div class="form-container">
+                <div class="form-contact-container" id="contactForm" style="display: none;">
+                    <div>
+                    </div>
 
 
-        </div>
-    <!-- Fonctions -->
-    <script>
+                </div>
+            </div>
+            <!-- Fonctions -->
+            <script>
 
-    </script>
+            </script>
 </body>
 
 </html>
