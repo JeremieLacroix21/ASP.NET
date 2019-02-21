@@ -25,10 +25,12 @@ body{
     text-align:left;
     color:black;
 }
-.main-container{
-
+.main-container {
+    border:2px solid black;
 }
-.main-contact-container{
-
-
+.main-contact-container {
+    display: grid;
+    grid-template-columns: 25% 20% 40% 5% 10%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
