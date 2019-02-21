@@ -1,3 +1,6 @@
 /*
     auteur: Charles Bourgeois et Jérémie Lacroix
 */
+.BlackBordure {
+    border: 1px solid black;
+}
