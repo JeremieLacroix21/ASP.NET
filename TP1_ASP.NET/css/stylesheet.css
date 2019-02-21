@@ -1,6 +1,19 @@
 /*
     auteur: Charles Bourgeois et Jérémie Lacroix
 */
-.BlackBordure {
+body{
+    background-color:aqua;
+}
+
+.blackBordure {
     border: 1px solid black;
+}
+
+.main-contact{
+    display:grid;
+    grid-template-columns:25% 20% 40% 5% 10%;z
+}
+.main-header{
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
