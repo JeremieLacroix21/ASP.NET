@@ -2,7 +2,7 @@
     auteur: Charles Bourgeois et Jérémie Lacroix
 */
 body{
-    background-color:aqua;
+    background-color:antiquewhite;
 }
 
 .blackBordure {
@@ -11,9 +11,16 @@ body{
 
 .main-contact{
     display:grid;
-    grid-template-columns:25% 20% 40% 5% 10%;z
+    grid-template-columns:25% 20% 40% 5% 10%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:15px;
 }
 .main-header{
-    overflow-y:scroll;
+    overflow-y:hidden;
     overflow-x:hidden;
+    border:double 3px black;
+    background-color:azure;
+    padding:5px;
+    text-align:left;
+    color:black;
 }
