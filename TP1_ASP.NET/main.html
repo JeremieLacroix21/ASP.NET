@@ -62,24 +62,24 @@
                 <div class="main-contact-container" id="">
                     <div>
                         <input type="hidden" id="" />
-                        <input type="text" id="" placeholder="Nom" class="form-control" />
+                        <input type="text" id="Name" placeholder="Nom" class="form-control" />
                     </div>
                     <div>
-                        <input type="text" id="" placeholder="Téléphone" class="phone form-control" />
+                        <input type="text" id="Phone" placeholder="Téléphone" class="phone form-control" />
                     </div>
                     <div>
-                        <input type="text" id="" placeholder="Courriel" class="form-control" />
+                        <input type="text" id="Email" placeholder="Courriel" class="form-control" />
                     </div>
                     <div>
-                        <button id="" tooltip="Ajouter" tooltip-position="left">
+                        <button id="ajoutContact" tooltip="Ajouter" tooltip-position="left">
                             <span class="glyphicon glyphicon glyphicon-ok"></span>
                         </button>
-                        <button id="" tooltip="Modifier" tooltip-position="left">
+                        <button id="modifierContact" tooltip="Modifier" tooltip-position="left">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                     </div>
                     <div>
-                        <button id="" tooltip="Annuler" tooltip-position="left">
+                        <button id="cancel" tooltip="Annuler" tooltip-position="left">
                             <span class="glyphicon glyphicon-repeat"></span>
                         </button>
                     </div>
@@ -101,15 +101,14 @@
             let ajouter = false;
             let validationProvider;
 
-            function initUI()
-            {
+            function initUI() {
                 initvalidation();
-                eraseform();
+                eraseControl();
                 //clic boutons 
-                $('#addContact').click(ajoutContact);
+                $('#ajoutContact').click(ajoutContact);
                 $('#showAddContact').click(showContact);
-                $('#modifyContact').click(modifierContact);
-                $('#cancel').click(eraseForm);
+                $('#modifierContact').click(modifierContact);
+                $('#cancel').click(eraseControl);
                 $('#Name').keypress(textInputAlphaFilter);
                 //message d'attente
                 MessageDattente();
@@ -120,6 +119,76 @@
                 $('#contactList').empty()
                 $('#contactList').append(makeCell("En attente de réponse du service Web...", "waiting"));
                 $('#contactList').append($('<img src="images/Loading_icon.gif" alt="waiting"/>'));
+            }
+            //validation provider 
+            function initValidation() {
+                $(".phone").mask("(999) 999-9999");
+                validationProvider = new ValidationProvider();
+                validationProvider.addControl("Name", validate_Name);
+                validationProvider.addControl("Phone", validate_Phone);
+                validationProvider.addControl("Email", validate_email);
+            }
+            function resetValidation() {
+                validationProvider.reset();
+            }
+            function validate_Name() {
+                let TBX_FirstName = document.getElementById("Name");
+
+                if (TBX_FirstName.value === "")
+                    return "Nom manquant";
+
+                return "";
+            }
+            function validate_Phone() {
+                let TBX_LastName = document.getElementById("Phone");
+
+                if (TBX_LastName.value === "")
+                    return "TÃ©lÃ©phone manquant";
+
+                return "";
+            }
+            function validate_email() {
+                let TBX_Email = document.getElementById("Email");
+                let emailRegex = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/;
+
+                if (TBX_Email.value === "")
+                    return "Adresse de courriel manquante";
+
+                if (!emailRegex.test(TBX_Email.value))
+                    return "Adresse de courriel invalide";
+
+                return "";
+            }
+            //fin du validation provider
+            //début du erasecontrol
+            function eraseControl() {
+                ajouter = false;
+                modifier = false;
+                resetValidation();
+
+                // rÃ©tablir la couleur de fond de toutes les rangÃ©es
+                $('.cell').removeClass('selectedRow');
+
+                // masquer le formulaire de saisie/modification de contact
+                $('#contactForm').hide();
+
+                // RÃ©tablir la visibilitÃ© par dÃ©faut des boutons
+                $('#addContact').show();
+                $('#modifyContact').hide();
+                $('#showAddContact').show();
+
+                // Effacer les champs du formulaire
+                $('#Name').val('');
+                $('#Phone').val('');
+                $('#Email').val('');
+
+                // Masquer tous les boutons des rangÃ©es de contact
+                $('#contactList button').hide();
+            }
+            //fin du erasecontrol
+            //debut du getcontact
+            function getContacts() {
+                webAPI_getContacts(updateContactList, insertErrorStatus);
             }
         </script>
 </body>
