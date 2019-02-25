@@ -51,7 +51,7 @@
                     <div>Téléphone</div>
                     <div>Courriel</div>
                     <div>
-                        <button id="AddContact" tooltip="Ajouter un contact" tooltip-position="left">
+                        <button id="barreAjout" tooltip="Ajouter un contact" tooltip-position="left">
                             <span class="glyphicon glyphicon-plus"></span> 
                         </button>
                     </div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="main-container">
-                <div class="main-contact-container" id="">
+                <div class="main-contact-container" id="contactContainer">
                     <div>
                         <input type="hidden" id="" />
                         <input type="text" id="Name" placeholder="Nom" class="form-control" />
@@ -106,7 +106,7 @@
                 eraseControl();
                 //clic boutons 
                 $('#ajoutContact').click(ajoutContact);
-                $('#showAddContact').click(showContact);
+                $('#barreAjout').click(barreAjout);
                 $('#modifierContact').click(modifierContact);
                 $('#cancel').click(eraseControl);
                 $('#Name').keypress(textInputAlphaFilter);
@@ -170,12 +170,12 @@
                 $('.cell').removeClass('selectedRow');
 
                 // masquer le formulaire de saisie/modification de contact
-                $('#contactForm').hide();
+                $('#contactContainer').hide();
 
                 // RÃ©tablir la visibilitÃ© par dÃ©faut des boutons
-                $('#addContact').show();
-                $('#modifyContact').hide();
-                $('#showAddContact').show();
+                $('#ajoutContact').show();
+                $('#modifierContact').hide();
+                $('#barreAjout').show();
 
                 // Effacer les champs du formulaire
                 $('#Name').val('');
@@ -186,9 +186,15 @@
                 $('#contactList button').hide();
             }
             //fin du erasecontrol
-            //debut du getcontact
+            // Requète au service web API: Liste des contacts
             function getContacts() {
                 webAPI_getContacts(updateContactList, insertErrorStatus);
+            }
+            // Afficher le formulaire pour la saisie de contact
+            function showAddContact() {
+                addMode = true;
+                $('#contactContainer').show();
+                $('#barreAjout').hide();
             }
         </script>
 </body>
