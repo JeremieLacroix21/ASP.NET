@@ -62,13 +62,13 @@
                 <div class="main-contact-container" id="">
                     <div>
                         <input type="hidden" id="" />
-                        <input type="text" id="" placeholder="Nom" class="nom-placeholder" />
+                        <input type="text" id="" placeholder="Nom" class="form-control" />
                     </div>
                     <div>
-                        <input type="text" id="" placeholder="Téléphone" class="téléphone-placeholder" />
+                        <input type="text" id="" placeholder="Téléphone" class="phone form-control" />
                     </div>
                     <div>
-                        <input type="text" id="" placeholder="Courriel" class="courriel-placeholder" />
+                        <input type="text" id="" placeholder="Courriel" class="form-control" />
                     </div>
                     <div>
                         <button id="" tooltip="Ajouter" tooltip-position="left">
@@ -87,14 +87,19 @@
             </div>
             <div class="main-list">
                 <div class="main-contact-list" id="">
-                 
+                <!-- faites par id-->
                 </div>
             </div>
         </div>
     </div>
         <!-- Fonctions -->
         <script>
-            
+            "use strict";
+            $(document).ready(initUI);
+
+            let modifier = false;
+            let ajouter = false;
+            let validationProvider;
         </script>
 </body>
 

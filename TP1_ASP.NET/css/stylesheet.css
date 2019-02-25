@@ -10,12 +10,11 @@ body{
     border: 1px solid black;
 }
 
-.main-contact{
-    display:grid;
-    grid-template-columns:25% 20% 40% 5% 10%;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size:15px;
-    
+.main-contact {
+    display: grid;
+    grid-template-columns: 25% 20% 40% 11.5% 3.5%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
 }
 .main-header{
     overflow-y:hidden;
@@ -32,19 +31,10 @@ body{
 }
 .main-contact-container {
     display: grid;
-    grid-template-columns: 25% 20% 40% 7% 8%;
-    padding:5px;
+    grid-template-columns: 25% 20% 40% 11.5% 3.5%;
+    padding: 5px;
+    text-align: right;
 }
-
-.nom-placeholder {
-}
-
-.téléphone-placeholder {
-}
-
-.courriel-placeholder {
-}
-
 .main-list {
     height: 400px;
     overflow-y: scroll;
