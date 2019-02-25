@@ -116,6 +116,11 @@
                 getContacts();
             }
 
+            function MessageDattente() {
+                $('#contactList').empty()
+                $('#contactList').append(makeCell("En attente de réponse du service Web...", "waiting"));
+                $('#contactList').append($('<img src="images/Loading_icon.gif" alt="waiting"/>'));
+            }
         </script>
 </body>
 
