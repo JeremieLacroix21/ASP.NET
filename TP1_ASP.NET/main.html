@@ -102,7 +102,7 @@
             let validationProvider;
 
             function initUI() {
-                initvalidation();
+                initValidation();
                 eraseControl();
                 //clic boutons 
                 $('#ajoutContact').click(ajoutContact);
@@ -250,7 +250,6 @@
                         webAPI_modifyContact(contact, getContacts, insertErrorStatus);
                     }
                 }
-            }
             // AprÃ¨s confirmation, requÃªte au service Web API de retrait d'un contact
             function deleteContact(e) {
                 // Extraction du Id du contact inscrit dans l'attribut id de l'Ã©lÃ©ment dÃ©clencheur de l'Ã©vÃ©nement click
