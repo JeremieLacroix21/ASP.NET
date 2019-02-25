@@ -36,11 +36,24 @@ body{
     padding:5px;
 }
 
-.main-list {
-
+.nom-placeholder {
 }
-.main.main-contact-list{
 
+.téléphone-placeholder {
+}
 
+.courriel-placeholder {
+}
+
+.main-list {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.main-contact-list {
+    display: grid;
+    grid-template-columns: 25% 20% 40% 5% 10%;
+    text-align: left;
+    padding: 5px;
 }
 
