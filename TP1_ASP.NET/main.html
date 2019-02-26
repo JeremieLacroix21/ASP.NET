@@ -206,55 +206,65 @@
                 $('#ajoutContact').hide();
                 $('#contactContainer').show();
 
-                let contactId = e.currentTarget.id.split('_')[1];
-                webAPI_getContact(contactId, RemplirModif);
+                let currentId = e.currentTarget.id.split('_')[1];
+                RemplirModif(currentId);
             }
 
-            function RemplirModif(contact) {
-                $('#Id').val(contact.Id); 
-                $('#Name').val(contact.Name);
-                $('#Phone').val(contact.Phone);
-                $('#Email').val(contact.Email);
-                $('#modifierContact').show();
+            function RemplirModif(contactId) {
+                for (let i in ListeDeContact) {
+                    if (ListeDeContact[i].Id == contactId) {
+                        $('#Id').val(ListeDeContact[i].Id);
+                        $('#Name').val(ListeDeContact[i].Nom);
+                        $('#Phone').val(ListeDeContact[i].Tel);
+                        $('#Email').val(ListeDeContact[i].Email);
+                        $('#modifierContact').show();
+                    }
+                }
             }
 
-            // Retourne un objet contact Ã  partir des valeurs prÃ©levÃ©es se trouvant dans les contrÃ´les de saisie.
-            // Si le paramÃ¨tre includeId est vrai, inclure le Id du contact dans l'objet contact retournÃ©
+            //trouve un contact
             function TrouveContact(includeId = false) {
                 if (includeId) {
                     // RÃ©cupÃ©ration du Id du contact dans le contrÃ´le cachÃ©
                     let contactId = $('#Id').val();
-                    return {Id: contactId, Name: $('#Name').val(), Phone: $('#Phone').val(), Email: $('#Email').val()};
+                    return {Id: contactId, Nom: $('#Name').val(), Tel: $('#Phone').val(), Email: $('#Email').val()};
                 }
-                return { Name: $('#Name').val(), Phone: $('#Phone').val(), Email: $('#Email').val()};
+                return { Nom: $('#Name').val(), Tel: $('#Phone').val(), Email: $('#Email').val()};
             }
 
 
-                // Ajout d'un contact *******************************************
+                // Ajout d'un contact 
                 function AjoutDeContact() {
                     let contact = TrouveContact();
                     if (validationProvider.isValid()) {
-                        let NewContact = new Contacts(contact.Name, contact.Phone, contact.Email);
+                        let NewContact = new Contacts(contact.Nom, contact.Tel, contact.Email);
                         ListeDeContact.push(NewContact);
+                        AfficherContact();
                     }
                 }
 
-                // Modifi un contact *******************************************
+                // Modifi un contact 
                  function ModifDeContact() {
-                    // construction de l'objet contact
                     let contact = TrouveContact(true);
                     if (validationProvider.isValid()) {
-                        let NewContact = new Contacts(contact.Name, contact.Phone, contact.Email);
-                        ListeDeContact.push(NewContact);
+                        for (let i in ListeDeContact) {
+                            if (ListeDeContact[i] == contact.Id)
+                            {
+                                ListeDeContact[i].Nom = contact.Nom;
+                                ListeDeContact[i].Tel = contact.Tel;
+                                ListeDeContact[i].Email = contact.Email;
+                            }
+                        }
+                        AfficherContact();
                     }
                 }
             // Effacer un contact ******************
             function EffacerContact(e) {
-                // Extraction du Id du contact inscrit dans l'attribut id de l'Ã©lÃ©ment dÃ©clencheur de l'Ã©vÃ©nement click 
                 let contactId = e.currentTarget.id.split('_')[1];
+                ConfirmmationEffacer(contactId);
             }
 
-            function confirmDeleteContact(contact) {
+            function ConfirmationEffacer(contact) {
                 $.confirm({
                     title: 'Attention!',
                     content: 'Effacer '+ contact.Name +'?',
