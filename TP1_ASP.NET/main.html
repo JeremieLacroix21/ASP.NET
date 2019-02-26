@@ -131,7 +131,7 @@
                 $('#Name').keypress(textInputAlphaFilter);
                 AfficherContact();
             }
-            //validation provider ****************************************
+            //validation provider 
             function initValidation() {
                 $(".phone").mask("(999) 999-9999");
                 validationProvider = new ValidationProvider();
@@ -154,7 +154,7 @@
                 let TBX_LastName = document.getElementById("Phone");
 
                 if (TBX_LastName.value === "")
-                    return "TÃ©lÃ©phone manquant";
+                    return "Téléphone manquant";
 
                 return "";
             }
@@ -171,7 +171,7 @@
                 return "";
             }
             //fin du validation provider
-            //début du erasecontrol ****************************************
+            //début du erasecontrol 
             function eraseControl() {
 
                 ajouter = false;
@@ -225,7 +225,6 @@
             //trouve un contact
             function TrouveContact(includeId = false) {
                 if (includeId) {
-                    // RÃ©cupÃ©ration du Id du contact dans le contrÃ´le cachÃ©
                     let contactId = $('#Id').val();
                     return {Id: contactId, Nom: $('#Name').val(), Tel: $('#Phone').val(), Email: $('#Email').val()};
                 }
@@ -236,8 +235,9 @@
                 // Ajout d'un contact 
                 function AjoutDeContact() {
                     let contact = TrouveContact();
+                    let id = 45;
                     if (validationProvider.isValid()) {
-                        let NewContact = new Contacts(contact.Nom, contact.Tel, contact.Email);
+                        let NewContact = new Contacts(id, contact.Nom, contact.Tel, contact.Email);
                         ListeDeContact.push(NewContact);
                         AfficherContact();
                     }
@@ -248,7 +248,7 @@
                     let contact = TrouveContact(true);
                     if (validationProvider.isValid()) {
                         for (let i in ListeDeContact) {
-                            if (ListeDeContact[i] == contact.Id)
+                            if (ListeDeContact[i].Id == contact.Id)
                             {
                                 ListeDeContact[i].Nom = contact.Nom;
                                 ListeDeContact[i].Tel = contact.Tel;
@@ -258,28 +258,32 @@
                         AfficherContact();
                     }
                 }
-            // Effacer un contact ******************
+            // Effacer un contact
             function EffacerContact(e) {
                 let contactId = e.currentTarget.id.split('_')[1];
-                ConfirmmationEffacer(contactId);
+                ConfirmationEffacer(contactId);
             }
 
             function ConfirmationEffacer(contact) {
-                $.confirm({
-                    title: 'Attention!',
-                    content: 'Effacer '+ contact.Name +'?',
-                    buttons: {
-                        confirmer: function () {
-                            webAPI_deleteContact(contact.Id, getContacts, insertErrorStatus);
-                        },
-                        annuler: {},
+                for (let i in ListeDeContact) {
+                    if (ListeDeContact[i].Id == contact) {
+                        $.confirm({
+                            title: 'Attention!',
+                            content: 'Effacer ' + ListeDeContact[i].Nom + '?',
+                            buttons: {
+                                confirmer: function () {
+                                    ListeDeContact.splice(i, 1);
+                                    AfficherContact();
+                                },
+                                annuler: {},
+                            }
+                        });  
                     }
-                });
+                }
             }
 
             function cellOver(e){
                 if (!ajouter && !modifier) {
-                    // currentTarget.className contient en principe : 'row_x cell ...'
                     let contactId = e.currentTarget.className.split(' ')[0].split('_')[1];
                     $('#edit_' + contactId).show();
                     $('#delete_' + contactId).show();
@@ -288,7 +292,6 @@
             }
             function cellBlur(e){
                 if (!modifier) {
-                    // currentTarget.className contient en principe : 'row_x cell ...'
                     let contactId = e.currentTarget.className.split(' ')[0].split('_')[1];
                     $('#edit_' + contactId).hide();
                     $('#delete_' + contactId).hide();
@@ -331,6 +334,11 @@
                                 makeGlyphIcon('remove'))));
                     oddRow = !oddRow;
                 };
+
+                for (let i in ListeDeContact)
+                {
+                    ListeDeContact[i].id = i;
+                }
 
                 $('.editContact').click(ShowModifDeContact);
                 $('.deleteContact').click(EffacerContact);
