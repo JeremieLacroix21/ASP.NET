@@ -173,35 +173,27 @@
             //fin du validation provider
             //début du erasecontrol ****************************************
             function eraseControl() {
+
                 ajouter = false;
                 modifier = false;
                 resetValidation();
 
-                // rÃ©tablir la couleur de fond de toutes les rangÃ©es
                 $('.cell').removeClass('selectedRow');
 
-                // masquer le formulaire de saisie/modification de contact
                 $('#contactContainer').hide();
-
-                // RÃ©tablir la visibilitÃ© par dÃ©faut des boutons
                 $('#ajoutContact').show();
                 $('#modifierContact').hide();
                 $('#barreAjout').show();
-
-                // Effacer les champs du formulaire
                 $('#Name').val('');
                 $('#Phone').val('');
                 $('#Email').val('');
-
-                // Masquer tous les boutons des rangÃ©es de contact
                 $('#list button').hide();
             }
-            //fin du erasecontrol
-            //affiche les contacts du tableau de contacts ****************************************
+            //affiche les contacts du tableau de contacts
             function AfficherContact() {
                 RafraichirListe(ListeDeContact);
             }
-            // Afficher le formulaire pour la saisie de contact *************************************
+            // Afficher le formulaire pour la saisie de contact 
             function ShowAjoutDeContact() {
                 ajouter = true;
                 $('#contactContainer').show();
@@ -315,17 +307,17 @@
                 $('#list').empty();
 
                 for (let i in ListeDeContact) {
-                    let bgColorRow = "row_" + contact.Id + " cell " + (oddRow ? "oddRow" : "evenRow");
-                    $('#list').append(makeCell(contacts[i].Name, bgColorRow));
+                    let bgColorRow = "row_" + contacts[i].Id + " cell " + (oddRow ? "oddRow" : "evenRow");
+                    $('#list').append(makeCell(contacts[i].Nom, bgColorRow));
                     $('#list').append(makeCell(contacts[i].Tel, bgColorRow));
                     $('#list').append(makeCell(contacts[i].Email, bgColorRow));
                     $('#list').append(
                         makeCell("", bgColorRow).append(
-                            makeButton("editContact", "edit_" + contact.Id, "Modifier " + contacts[i].Name).append(
+                            makeButton("editContact", "edit_" + contacts[i].Id, "Modifier " + contacts[i].Nom).append(
                                 makeGlyphIcon('pencil'))));
                     $('#list').append(
                         makeCell("", bgColorRow).append(
-                            makeButton("deleteContact", "delete_" + contact.Id, "Effacer " + contacts[i].Name).append(
+                            makeButton("deleteContact", "delete_" + contacts[i].Id, "Effacer " + contacts[i].Nom).append(
                                 makeGlyphIcon('remove'))));
                     oddRow = !oddRow;
                 };
