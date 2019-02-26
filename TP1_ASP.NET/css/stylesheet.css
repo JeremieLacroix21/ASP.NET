@@ -37,13 +37,31 @@ body{
 }
 .main-list {
     height: 400px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 .main-contact-list {
     display: grid;
     grid-template-columns: 25% 20% 40% 5% 10%;
     text-align: left;
-    padding: 5px;
+    padding: 1px;
+    border: double 3px black;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
+.oddRow {
+    background-color: white;
+}
+
+.evenRow {
+    background-color: azure;
+}
+
+.cell {
+    height: 45px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.selectedRow {
+    background-color: aliceblue;
+}
