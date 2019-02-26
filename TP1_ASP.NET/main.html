@@ -97,24 +97,22 @@
             "use strict";
             //class contact
             class Contacts {
-                constructor(Nom, Tel, Email) {
+                constructor(Id, Nom, Tel, Email) {
+                    this.Id = Id;
                     this.Nom = Nom;
                     this.Tel = Tel;
                     this.Email = Email;
-                }
-                GetNom() {
-                    return this.Nom;
                 }
             }
 
             let ListeDeContact =
             [
-               new Contacts("Étienne Forest", "514-974-3333", "Etienne.Forest@clg.qc.ca"),
-               new Contacts("François Boileau", "450-430-3190", "Francois.Boileau@clg.qc.ca"),
-               new Contacts("Étienne Forest","514-974-3333", "Etienne.Forest@clg.qc.ca"),
-               new Contacts("Étienne Forest","514-974-3333", "Etienne.Forest@clg.qc.ca"),
-               new Contacts("Étienne Forest","514-974-3333", "Etienne.Forest@clg.qc.ca"),
-               new Contacts("Étienne Forest", "514-974-3333", "Etienne.Forest@clg.qc.ca")
+               new Contacts(1,"Étienne Forest", "514-974-3333", "Etienne.Forest@clg.qc.ca"),
+               new Contacts(2,"François Boileau", "450-430-3190", "Francois.Boileau@clg.qc.ca"),
+               new Contacts(3,"Étienne Forest","514-974-3333", "Etienne.Forest@clg.qc.ca"),
+               new Contacts(4,"Étienne Forest","514-974-3333", "Etienne.Forest@clg.qc.ca"),
+               new Contacts(5,"Étienne Forest","514-974-3333", "Etienne.Forest@clg.qc.ca"),
+               new Contacts(6,"Étienne Forest", "514-974-3333", "Etienne.Forest@clg.qc.ca")
             ]
             $(document).ready(initUI);
 
@@ -201,13 +199,7 @@
             //fin du erasecontrol
             //affiche les contacts du tableau de contacts ****************************************
             function AfficherContact() {
-                for (let i in ListeDeContact) {
-                    $('#list').append(makeCell(ListeDeContact[i].Nom));
-                    $('#list').append(makeCell(ListeDeContact[i].Tel));
-                    $('#list').append(makeCell(ListeDeContact[i].Email));
-                    $('#list').append(makeCell(" "));
-                    $('#list').append(makeCell(" "));
-                }
+                RafraichirListe(ListeDeContact);
             }
             // Afficher le formulaire pour la saisie de contact *************************************
             function ShowAjoutDeContact() {
@@ -268,9 +260,6 @@
             function EffacerContact(e) {
                 // Extraction du Id du contact inscrit dans l'attribut id de l'Ã©lÃ©ment dÃ©clencheur de l'Ã©vÃ©nement click 
                 let contactId = e.currentTarget.id.split('_')[1];
-                for (let i in ListeDeContact) {
-                    if (ListeDeContact[i])
-                }
             }
 
             function confirmDeleteContact(contact) {
@@ -318,46 +307,33 @@
             }
 
             // Rafraichir la liste des contacts
-            // paramÃ¨tre contacts: tableau d'objets contact
-            function updateContactList(contacts) {
+            function RafraichirListe(contacts) {
+
                 eraseControl();
+
                 var oddRow = true;
-                // effacer le tableau affichant la liste de contacts
                 $('#list').empty();
 
-                // pour tous les contacts du tableau contacts
-                contacts.forEach(contact => { // crÃ©er une nouvelle rangÃ©e
-
-                    // dÃ©terminer la couleur de la rangÃ©e
-                    let bgColorRow = "row_" + contact.Id + " cell " + (oddRow?  "oddRow": "evenRow") ;
-
-                    // Distribution des donnÃ©es du contact dans des cellules de la rangÃ©e
-                    $('#list').append(makeCell(contact.Name, bgColorRow ));
-                    $('#list').append(makeCell(contact.Phone, bgColorRow));
-                    $('#list').append(makeCell(contact.Email, bgColorRow));
-
-                    // Bouton d'appel Ã  la modification du contact
+                for (let i in ListeDeContact) {
+                    let bgColorRow = "row_" + contact.Id + " cell " + (oddRow ? "oddRow" : "evenRow");
+                    $('#list').append(makeCell(contacts[i].Name, bgColorRow));
+                    $('#list').append(makeCell(contacts[i].Tel, bgColorRow));
+                    $('#list').append(makeCell(contacts[i].Email, bgColorRow));
                     $('#list').append(
                         makeCell("", bgColorRow).append(
-                            makeButton("editContact","edit_" + contact.Id ,"Modifier "+ contact.Name).append(
+                            makeButton("editContact", "edit_" + contact.Id, "Modifier " + contacts[i].Name).append(
                                 makeGlyphIcon('pencil'))));
-
-                    // Bouton d'appel au retrait du contact
                     $('#list').append(
                         makeCell("", bgColorRow).append(
-                            makeButton("deleteContact","delete_" + contact.Id ,"Effacer "+ contact.Name).append(
+                            makeButton("deleteContact", "delete_" + contact.Id, "Effacer " + contacts[i].Name).append(
                                 makeGlyphIcon('remove'))));
-
                     oddRow = !oddRow;
-                });
+                };
 
-                // Attacher les gestionnaires du clic aux nouveaux boutons
                 $('.editContact').click(ShowModifDeContact);
                 $('.deleteContact').click(EffacerContact);
                 $('#list button').hide();
                 $('input').on("paste",function(e) { e.preventDefault(); });
-
-                // Attacher les Ã©vÃ©nements pour mettre en surbrillance une rangÃ©e survolÃ©e
                 $('.cell').mouseover(cellOver);
                 $('.cell').mouseleave(cellBlur);
             }
