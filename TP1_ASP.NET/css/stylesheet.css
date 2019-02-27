@@ -14,26 +14,32 @@ body{
     display: grid;
     grid-template-columns: 25% 20% 40% 11.5% 3.5%;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 15px;
+    font-size: 20px;
+    color:black;
+    padding:10px;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
 }
 .main-header{
     overflow-y:hidden;
     overflow-x:hidden;
-    border:double 3px black;
-    background-color:azure;
-    padding:5px;
+    border:solid 1px black;
+    background-color: whitesmoke;
     text-align:left;
-    color:black;
 }
 .main-container {
-    border:3px black double;
+    border:1px black solid;
     background-color:azure;
+
 }
 .main-contact-container {
     display: grid;
     grid-template-columns: 25% 20% 40% 11.5% 3.5%;
     padding: 5px;
     text-align: right;
+
 }
 .main-list {
     height: 400px;
@@ -43,9 +49,11 @@ body{
     grid-template-columns: 25% 20% 40% 5% 10%;
     text-align: left;
     padding: 1px;
-    border: double 3px black;
+    border: solid 1px black;
     overflow-y: scroll;
     overflow-x: hidden;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .oddRow {
@@ -53,7 +61,7 @@ body{
 }
 
 .evenRow {
-    background-color: azure;
+    background-color: rgb(232,232,232);
 }
 
 .cell {
@@ -63,5 +71,5 @@ body{
 }
 
 .selectedRow {
-    background-color: darkgray;
+    background-color: lightgray;
 }
