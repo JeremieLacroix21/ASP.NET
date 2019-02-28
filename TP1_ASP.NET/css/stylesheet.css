@@ -13,7 +13,7 @@ body{
 .main-contact {
     display: grid;
     grid-template-columns: 25% 20% 40% 11.5% 3.5%;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Times New Roman", Times, serif;
     font-size: 20px;
     color:black;
     padding:10px;
@@ -44,6 +44,7 @@ body{
     padding: 5px;
     text-align: right;
     box-shadow: 5px 10px 8px #888888;
+ border: 2px solid black;
 }
 .main-list {
 
